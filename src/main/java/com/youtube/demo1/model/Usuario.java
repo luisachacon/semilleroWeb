@@ -22,13 +22,13 @@ public class Usuario {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="nombre",nullable=true)
+	@Column(name="nombre")
 	private String nombre;
-	@Column(name="direccion",nullable=true)
+	@Column(name="direccion")
 	private String direccion;
-	@Column(name="telefono",nullable=true)
+	@Column(name="telefono")
 	private int telefono;
-	@Column(name="rol",nullable=true)
+	@Column(name="rol")
 	private String rol;
 	
 	

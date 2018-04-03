@@ -1,5 +1,7 @@
 package com.youtube.demo1.model;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,12 +9,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="producto")
+@Access(AccessType.FIELD)
 
 public class Producto {
 	
+	private static final int serialVersionUID = (int) 1L;
 	@Id
 	@Column(name="id")
 	private int id;
+	
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="precio_Unidad")

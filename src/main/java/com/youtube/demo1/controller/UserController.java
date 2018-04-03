@@ -11,76 +11,73 @@ import com.youtube.demo1.model.Usuario;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.youtube.demo1.service.UserService;
 import com.youtube.demo1.service.UserServicelmpl;
 import com.youtube.demo1.util.RestResponse;
 
-import antlr.StringUtils;
 
 @RestController
 public class UserController {
-	
+
 	@Autowired
 	protected UserServicelmpl userServiceImpl;
-	
-	
+
 	protected ObjectMapper mapper;
-	
-	@RequestMapping(value="/saveOrUpdate",method=RequestMethod.POST)
-	public RestResponse saveOrUpdate(@RequestBody String userJson) throws JsonParseException, JsonMappingException, IOException {
-	
-		this.mapper=new ObjectMapper();
-		
-		Usuario user=this.mapper.readValue(userJson, Usuario.class);
+
+	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+	public RestResponse saveOrUpdate(@RequestBody String userJson)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		this.mapper = new ObjectMapper();
+
+		Usuario user = this.mapper.readValue(userJson, Usuario.class);
 		System.out.println("entidad" + userJson);
-		
-		if(!this.validate(user)) {
-			
-			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "Los campos obligatorios no están diligenciados");
-			
+
+		if (!this.validate(user)) {
+
+			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(),
+					"Los campos obligatorios no están diligenciados");
 		}
-	
 		this.userServiceImpl.save(user);
-		return new RestResponse(HttpStatus.OK.value(),"Operación exitosa");
-		
+		return new RestResponse(HttpStatus.OK.value(), "Operación exitosa");
 	}
-	
-	@RequestMapping(value="/deleteUser",method=RequestMethod.POST)
-	public void deleteUser(@RequestBody String userJson) throws Exception {
-		
-		this.mapper=new ObjectMapper();
-		
-		Usuario user=this.mapper.readValue(userJson, Usuario.class);
-		if(user.getId()==0) {
-			
+
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+	public RestResponse deleteUser(@RequestBody String userJson) throws Exception {
+
+		this.mapper = new ObjectMapper();
+
+		Usuario user = this.mapper.readValue(userJson, Usuario.class);
+		if (user.getId() == 0) {
+
 			throw new Exception("El id está vacío");
 		}
-		Usuario user1 = this.userServiceImpl.findById(user.getId()); 
-		
+		Usuario user1 = this.userServiceImpl.findById(user.getId());
+
 		this.userServiceImpl.deleteUser(user1);
 		System.out.println("entra");
+		return new RestResponse(HttpStatus.OK.value(),"eliminadoo chico :v");
 	}
-	
-	
+
 	private boolean validate(Usuario user) {
-		boolean isValid=true;
+		boolean isValid = true;
 		
-		if(user.getNombre()==""||user.getNombre()==null) {
-			
-			isValid=false;
+		if (user.getId() == 0) {
+			isValid = false;	
 		}
-		if(user.getTelefono()==0) {
-			
-			isValid=false;
+		if (user.getNombre() == "" || user.getNombre() == null) {
+			isValid = false;
 		}
-		if(user.getDireccion()==""||user.getDireccion()==null) {
-			
-			isValid=false;
+		if (user.getTelefono() == 0) {
+			isValid = false;
 		}
-		if(user.getRol()==" "||user.getRol()==null) {
-			isValid=false;
+		if (user.getDireccion() == "" || user.getDireccion() == null) {
+			isValid = false;
+		}
+		if (user.getRol() == " " || user.getRol() == null) {
+			isValid = false;
 		}
 		return isValid;
 	}
 
+	
 }
