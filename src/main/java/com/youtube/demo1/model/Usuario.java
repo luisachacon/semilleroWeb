@@ -1,10 +1,16 @@
 package com.youtube.demo1.model;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +22,6 @@ public class Usuario {
 	/**
 	 * 
 	 */
-	private static final int serialVersionUID = (int) 1L;
 
 	@Id
 	@Column(name="id")
@@ -31,6 +36,13 @@ public class Usuario {
 	@Column(name="rol")
 	private String rol;
 	
+	
+	@ManyToMany
+	@JoinTable(name="usuariocatalogo",joinColumns={@JoinColumn(name="id_user")},inverseJoinColumns= {@JoinColumn(name="id_catalogo")})
+	private List<Catalogo>catalogo;
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Registro>registro;
 	
 	public Usuario() {
 		

@@ -7,19 +7,14 @@ import com.youtube.demo1.dao.ProductRepository;
 import com.youtube.demo1.model.Producto;
 
 @Service
-public class ProductServiceImpl  implements ProductService{
-	
+public class ProductServiceImpl implements ProductService {
+
 	@Autowired
 	protected ProductRepository productRepository;
-
-	public Producto add(Producto product) {
+	
+	public Producto save(Producto product) {
 		
-		System.out.println(product.getNombre());
-		return this.productRepository.add(product);
-		}
-
-	public void deleteProduct(Producto product) {
-		productRepository.delete(product);
+		return this.productRepository.save(product);
 		// TODO Auto-generated method stub
 		
 	}
@@ -29,6 +24,10 @@ public class ProductServiceImpl  implements ProductService{
 		return this.productRepository.findById(id);
 	}
 
-	
-	
+	public void deleteProduct(Producto product1) {
+		// TODO Auto-generated method stub
+		this.productRepository.delete(product1);
+	}
+
+
 }

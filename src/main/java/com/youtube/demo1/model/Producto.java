@@ -5,15 +5,16 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="producto")
+@Table(name="Producto")
 @Access(AccessType.FIELD)
-
+		
 public class Producto {
 	
-	private static final int serialVersionUID = (int) 1L;
 	@Id
 	@Column(name="id")
 	private int id;
@@ -21,65 +22,59 @@ public class Producto {
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="precio_Unidad")
-	private float precio_Unidad;
+	private double precio_Unidad;
 	@Column(name="descuento_Unidad")
-	private float descuentoUnidad;
+	private double descuento_Unidad;
+	
+	@ManyToOne
+	@JoinColumn(name="id_catalogo")
+	private Catalogo catalogo;
 	
 	
 	public Producto() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public Producto(int id, String nombre, float precio_Unidad, float descuentoUnidad) {
-	
+	public Producto(int id, String nombre, double precio_Unidad, double descuento_Unidad) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio_Unidad = precio_Unidad;
-		this.descuentoUnidad = descuentoUnidad;
+		this.descuento_Unidad = descuento_Unidad;
 	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-	public float getPrecio_Unidad() {
+	public double getPrecio_Unidad() {
 		return precio_Unidad;
 	}
 
-
-	public void setPrecio_Unidad(float precio_Unidad) {
+	public void setPrecio_Unidad(double precio_Unidad) {
 		this.precio_Unidad = precio_Unidad;
 	}
 
-
-	public float getDescuentoUnidad() {
-		return descuentoUnidad;
+	public double getDescuento_Unidad() {
+		return descuento_Unidad;
 	}
 
+	public void setDescuento_Unidad(double descuento_Unidad) {
+		this.descuento_Unidad = descuento_Unidad;
 
-	public void setDescuentoUnidad(float descuentoUnidad) {
-		this.descuentoUnidad = descuentoUnidad;
-	}
-	
-	
-
-
+}
 
 }

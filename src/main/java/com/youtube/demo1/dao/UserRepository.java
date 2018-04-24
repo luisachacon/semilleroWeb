@@ -10,8 +10,8 @@ public interface UserRepository extends JpaRepository<Usuario, Long>{
 
 	@SuppressWarnings("unchecked")
 	Usuario save(Usuario user);
-
-	void delete(Usuario id);
 	
 	Usuario findById(int id);	
+	
+	void delete(Usuario user);
 }

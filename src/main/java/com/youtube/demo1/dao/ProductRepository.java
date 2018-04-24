@@ -6,13 +6,12 @@ import com.youtube.demo1.model.Producto;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Producto,Long>{
-	
 
-	
-	Producto add(Producto product);
-	
-	void delete(Producto id);
+	@SuppressWarnings("unchecked")
+	Producto save(Producto product);
 
 	Producto findById(int id);
 
+	void delete(Producto producto);
+	
 }
